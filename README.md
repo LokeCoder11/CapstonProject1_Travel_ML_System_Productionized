@@ -49,22 +49,21 @@ total: Total booking cost
 date: Check-in date
 
 System Architecture
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Data Sources  │    │   ML Pipeline   │    │   Deployment    │
-│                 │    │                 │    │                 │
-│ • Users CSV     │──▶ │• Data Prep     │───▶│ • Docker        │
-│ • Flights CSV   │    │ • Feature Eng   │    │ • Kubernetes    │
-│ • Hotels CSV    │    │ • Model Train   │    │ • REST API      │
-└─────────────────┘    │ • Validation    │    │ • Streamlit     │
-                       └─────────────────┘    └─────────────────┘
-                                │
-                       ┌─────────────────┐
-                       │   MLOps Stack   │
-                       │                 │
-                       │ • Airflow DAGs  │
-                       │ • Jenkins CI/CD │
-                       │ • MLFlow Track  │
-                       └─────────────────┘
+
+The system architecture follows a three-tier approach with integrated MLOps capabilities.
+
+Data Sources Layer
+The foundation consists of three primary data inputs: a Users CSV containing customer information and preferences, a Flights CSV with airline data and schedules, and a Hotels CSV containing accommodation details and availability.
+
+ML Pipeline Layer
+Data flows from the sources into a comprehensive machine learning pipeline that handles four key stages. First, data preparation cleanses and standardizes the incoming information. Next, feature engineering transforms raw data into meaningful predictors for the models. The system then performs model training using the prepared features, followed by validation to ensure model performance meets quality standards.
+
+Deployment Layer
+The trained models are deployed through a containerized infrastructure using Docker for packaging and Kubernetes for orchestration. The system exposes functionality through a REST API for programmatic access and provides a Streamlit interface for user interaction and visualization.
+
+MLOps Stack
+Supporting the entire pipeline is a robust MLOps infrastructure. Airflow DAGs orchestrate and schedule the various pipeline stages, ensuring smooth data flow and model updates. Jenkins handles continuous integration and deployment, automating testing and releases. MLFlow provides comprehensive experiment tracking and model versioning throughout the development lifecycle.
+This architecture enables scalable, automated machine learning operations while maintaining clear separation of concerns between data ingestion, processing, and deployment phases.
 
 Project Components
 
